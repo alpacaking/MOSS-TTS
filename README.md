@@ -53,6 +53,7 @@ MOSS‑TTS Family is an open‑source **speech and sound generation model family
   - [Environment Setup](#environment-setup)
   - [(Optional) Install FlashAttention 2](#optional-install-flashattention-2)
   - [MOSS-TTS Basic Usage](#moss-tts-basic-usage)
+- [llama.cpp Backend (Torch-Free Inference)](#llamacpp-backend-torch-free-inference)
 - [Evaluation](#evaluation)
   - [MOSS-TTS](#moss-tts-seed-tts-eval)
   - [MOSS-TTSD](#moss-ttsd-subjective--ttsd-eval)
@@ -145,7 +146,7 @@ Install all required dependencies:
 ```bash
 git clone https://github.com/OpenMOSS/MOSS-TTS.git
 cd MOSS-TTS
-pip install --extra-index-url https://download.pytorch.org/whl/cu128 -e .
+pip install --extra-index-url https://download.pytorch.org/whl/cu128 -e ".[torch-runtime]"
 ```
 
 #### Using `uv`
@@ -156,7 +157,7 @@ git clone https://github.com/OpenMOSS/MOSS-TTS.git
 cd MOSS-TTS
 uv venv --python 3.12 .venv
 source .venv/bin/activate
-uv pip install --torch-backend cu128 -e .
+uv pip install --torch-backend cu128 -e ".[torch-runtime]"
 ```
 
 #### (Optional) Install FlashAttention 2
@@ -166,25 +167,25 @@ For better speed and lower GPU memory usage, you can install FlashAttention 2 if
 If you use Conda/pip:
 
 ```bash
-pip install --extra-index-url https://download.pytorch.org/whl/cu128 -e ".[flash-attn]"
+pip install --extra-index-url https://download.pytorch.org/whl/cu128 -e ".[torch-runtime,flash-attn]"
 ```
 
 If your machine has limited RAM and many CPU cores, you can cap build parallelism:
 
 ```bash
-MAX_JOBS=4 pip install --extra-index-url https://download.pytorch.org/whl/cu128 -e ".[flash-attn]"
+MAX_JOBS=4 pip install --extra-index-url https://download.pytorch.org/whl/cu128 -e ".[torch-runtime,flash-attn]"
 ```
 
 If you use `uv`:
 
 ```bash
-uv pip install --torch-backend cu128 -e ".[flash-attn]"
+uv pip install --torch-backend cu128 -e ".[torch-runtime,flash-attn]"
 ```
 
 If your machine has limited RAM and many CPU cores, you can cap build parallelism:
 
 ```bash
-MAX_JOBS=4 uv pip install --torch-backend cu128 -e ".[flash-attn]"
+MAX_JOBS=4 uv pip install --torch-backend cu128 -e ".[torch-runtime,flash-attn]"
 ```
 
 Notes:
@@ -319,6 +320,62 @@ with torch.no_grad():
 
 For each model’s full usage, please refer to its corresponding model card.
 
+
+## llama.cpp Backend (Torch-Free Inference)
+
+For lightweight or edge deployment, MOSS-TTS supports a **torch-free** inference path using [llama.cpp](https://github.com/ggerganov/llama.cpp) for the Qwen3 backbone and ONNX Runtime / TensorRT for the audio tokenizer. No PyTorch installation required.
+
+### Quick Start
+
+```bash
+# 1. Install (torch-free)
+pip install -e ".[llama-cpp-onnx]"
+
+# 2. Download pre-quantized backbone + embedding/lm_head weights
+huggingface-cli download OpenMOSS-Team/MOSS-TTS-GGUF --local-dir weights/MOSS-TTS-GGUF
+
+# 3. Download ONNX audio tokenizer
+huggingface-cli download OpenMOSS-Team/MOSS-Audio-Tokenizer-ONNX --local-dir weights/MOSS-Audio-Tokenizer-ONNX
+
+# 4. Build the C bridge (one-time, requires llama.cpp compiled from source)
+cd moss_tts_delay/llama_cpp && bash build_bridge.sh /path/to/llama.cpp && cd ../..
+
+# 5. Run inference
+python -m moss_tts_delay.llama_cpp \
+    --config configs/llama_cpp/default.yaml \
+    --text "Hello, world!" --output output.wav
+```
+
+### Installation Profiles
+
+| Profile | Install Command | Dependencies | Use Case |
+|---------|----------------|--------------|----------|
+| **Torch-free (ONNX)** | `pip install -e ".[llama-cpp-onnx]"` | numpy, onnxruntime-gpu, tokenizers | Recommended starting point |
+| **Torch-free (TRT)** | `pip install -e ".[llama-cpp-trt]"` | numpy, tensorrt, cuda-python | Maximum audio tokenizer speed (build engines yourself) |
+| **Torch-accelerated** | `pip install -e ".[llama-cpp-onnx,llama-cpp-torch]"` | + torch | GPU-accelerated LM heads (~30x faster) |
+
+### Model Weights
+
+| Repository | Contents | Download |
+|-----------|----------|----------|
+| [`OpenMOSS-Team/MOSS-TTS-GGUF`](https://huggingface.co/OpenMOSS-Team/MOSS-TTS-GGUF) | Q4_K_M backbone `.gguf`, `embeddings/` (`.npy`), `lm_heads/` (`.npy`), tokenizer | `huggingface-cli download OpenMOSS-Team/MOSS-TTS-GGUF --local-dir weights/MOSS-TTS-GGUF` |
+| [`OpenMOSS-Team/MOSS-Audio-Tokenizer-ONNX`](https://huggingface.co/OpenMOSS-Team/MOSS-Audio-Tokenizer-ONNX) | Encoder & decoder ONNX models | `huggingface-cli download OpenMOSS-Team/MOSS-Audio-Tokenizer-ONNX --local-dir weights/MOSS-Audio-Tokenizer-ONNX` |
+
+> **Note:** We do **not** provide pre-built TensorRT engines, as they are tied to your specific GPU and TensorRT version. To use TRT, build engines from the ONNX models yourself — see `moss_audio_tokenizer/trt/build_engine.sh`.
+
+### Configuration
+
+Three pre-built configs are provided in `configs/llama_cpp/`:
+
+- `default.yaml` — ONNX audio + GGUF backbone (recommended start)
+- `trt.yaml` — TensorRT audio + GGUF backbone (max throughput, user-built engines)
+- `cpu-only.yaml` — fully CPU-based (no GPU required)
+
+Key config options:
+- `heads_backend: auto | numpy | torch` — LM heads computation backend
+- `audio_backend: onnx | trt | torch` — audio tokenizer backend
+
+For full documentation, see [moss_tts_delay/llama_cpp/README.md](moss_tts_delay/llama_cpp/README.md).
 
 ## Evaluation
 
