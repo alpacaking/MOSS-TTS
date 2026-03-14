@@ -342,6 +342,7 @@ with torch.no_grad():
 当前已提供：
 
 - `MossTTSDelay` / `OpenMOSS-Team/MOSS-TTS`：见 [moss_tts_delay/finetuning/README_zh.md](moss_tts_delay/finetuning/README_zh.md)
+- `MossTTSLocal` / `OpenMOSS-Team/MOSS-TTS-Local-Transformer`：见 [moss_tts_local/finetuning/README_zh.md](moss_tts_local/finetuning/README_zh.md)
 
 后续其余架构的微调教程也会分别补充到对应目录下。
 

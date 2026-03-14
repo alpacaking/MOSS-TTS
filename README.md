@@ -334,6 +334,7 @@ Finetuning tutorials are organized by architecture.
 Currently available:
 
 - `MossTTSDelay` / `OpenMOSS-Team/MOSS-TTS`: [moss_tts_delay/finetuning/README.md](moss_tts_delay/finetuning/README.md)
+- `MossTTSLocal` / `OpenMOSS-Team/MOSS-TTS-Local-Transformer`: [moss_tts_local/finetuning/README.md](moss_tts_local/finetuning/README.md)
 
 Additional architecture-specific finetuning tutorials will be added under their corresponding directories.
 
