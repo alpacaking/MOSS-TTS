@@ -32,6 +32,7 @@
 MOSS‑TTS Family is an open‑source **speech and sound generation model family** from [MOSI.AI](https://mosi.cn/#hero) and the [OpenMOSS team](https://www.open-moss.com/). It is designed for **high‑fidelity**, **high‑expressiveness**, and **complex real‑world scenarios**, covering stable long‑form speech, multi‑speaker dialogue, voice/character design, environmental sound effects, and real‑time streaming TTS.
 
 ## News
+* 2026.3.12: 🚀 Added SGLang backend support for the `MossTTSDelay` architecture, enabling efficient inference for MOSS-TTS (Delay) and MOSS-SoundEffect, with around **3× faster** generation throughput!
 * 2026.3.11: 📘 Added a tutorial on fine-tuning the MossTTSDelay architecture, suitable for MOSS-TTS(Delay), MOSS-TTSD, MOSS-VoiceGenerator, and MOSS-SoundEffect!
 * 2026.3.10: ⚡️ Significantly optimized the VRAM usage of llama.cpp inference pipeline. Now 8B model fits onto 8GB GPUs!
 * 2026.3.4: 🚀 Added **PyTorch-free inference support** — enabling lightweight on-device deployment via **llama.cpp + ONNX Runtime**. Quantized **GGUF weights** are released at [OpenMOSS-Team/MOSS-TTS-GGUF](https://huggingface.co/OpenMOSS-Team/MOSS-TTS-GGUF), and the **ONNX audio tokenizer** is available at [OpenMOSS-Team/MOSS-Audio-Tokenizer-ONNX](https://huggingface.co/OpenMOSS-Team/MOSS-Audio-Tokenizer-ONNX). See the [llama.cpp backend](#llamacpp-backend-torch-free-inference) for details.
@@ -58,6 +59,7 @@ MOSS‑TTS Family is an open‑source **speech and sound generation model family
   - [MOSS-TTS Basic Usage](#moss-tts-basic-usage)
 - [Fine-Tuning](#fine-tuning)
 - [llama.cpp Backend (Torch-Free Inference)](#llamacpp-backend-torch-free-inference)
+- [SGLang Backend (Accelerated Inference)](#sglang-backend-accelerated-inference)
 - [Evaluation](#evaluation)
   - [MOSS-TTS](#moss-tts-seed-tts-eval)
   - [MOSS-TTSD](#moss-ttsd-subjective--ttsd-eval)
@@ -79,7 +81,7 @@ When a single piece of audio needs to **sound like a real person**, **pronounce 
 - **MOSS‑TTS**: The flagship production model featuring high fidelity and optimal zero-shot voice cloning. It supports **long-speech generation**, **fine-grained control over Pinyin, phonemes, and duration**, as well as **multilingual/code-switched synthesis**.
 - **MOSS‑TTSD**: A spoken dialogue generation model for expressive, multi-speaker, and ultra-long dialogues. The new **v1.0 version** achieves **industry-leading performance on objective metrics** and **outperformed top closed-source models like Doubao and Gemini 2.5-pro** in subjective evaluations. You can visit the [MOSS-TTSD repository](https://github.com/OpenMOSS/MOSS-TTSD) for details.
 - **MOSS‑VoiceGenerator**: An open-source voice design model capable of generating diverse voices and styles directly from text prompts, **without any reference speech**. It unifies voice design, style control, and synthesis, functioning independently or as a design layer for downstream TTS. Its performance **surpasses other top-tier voice design models in arena ratings**.
-- **MOSS‑TTS‑Realtime**: A multi-turn context-aware model for real-time voice agents. It uses incremental synthesis to ensure natural and coherent replies, making it **ideal for building low-latency voice agents when paired with text models**.
+- **MOSS‑TTS‑Realtime**: A multi-turn context-aware model for real-time voice agents. It uses incremental synthesis to ensure natural and coherent replies, making it **ideal for building low-latency voice agents when paired with text models**. The TTFB (Time To First Byte) of MOSS-TTS-Realtime reaches 180 ms, and the $T_{\text{LLM-first-sentence}} + T_{\text{MOSS-TTS-Realtime-TTFB}}$ is 377 ms.
 - **MOSS‑SoundEffect**: A content creation model specialized in **sound effect generation** with wide category coverage and controllable duration. It generates audio for natural environments, urban scenes, biological sounds, human actions, and musical fragments, suitable for film, games, and interactive experiences.
 
 
@@ -402,6 +404,88 @@ Key config options:
 
 For full documentation, see [moss_tts_delay/llama_cpp/README.md](moss_tts_delay/llama_cpp/README.md).
 
+## SGLang Backend (Accelerated Inference)
+
+MOSS-TTS (Delay) supports running the fused MOSS-TTS and MOSS-Audio-Tokenizer model with the deeply extended [SGLang](https://github.com/OpenMOSS/sglang) from OpenMOSS, enabling efficient inference for audio generation.
+
+### Quick Start
+
+```bash
+# 1. Clone the SGLang repository
+git clone https://github.com/OpenMOSS/sglang.git
+
+# 2. Install SGLang
+pip install -e ./sglang/python[all]
+
+# 3. (Optional) Fix the SGLang CuDNN compatibility error
+#    RuntimeError: CRITICAL WARNING: PyTorch 2.9.1 & CuDNN Compatibility Issue Detected
+pip install nvidia-cudnn-cu12==9.16.0.29
+
+# 4. Download the model and audio tokenizer weights
+huggingface-cli download OpenMOSS-Team/MOSS-TTS --local-dir weights/MOSS-TTS
+huggingface-cli download OpenMOSS-Team/MOSS-Audio-Tokenizer --local-dir weights/MOSS-Audio-Tokenizer
+
+# 5. Fuse the model and audio tokenizer weights
+python scripts/fuse_moss_tts_delay_with_codec.py --model-path weights/MOSS-TTS --codec-model-path weights/MOSS-Audio-Tokenizer --save-path weights/MOSS-TTS-Delay-With-Codec
+
+# 6. Start the service
+sglang serve --model-path weights/MOSS-TTS-Delay-With-Codec --delay-pattern --trust-remote-code
+```
+
+> If the fused output directory already exists, you can append `--overwrite` to replace it directly, or confirm the overwrite interactively when prompted.
+
+> **Note:** The first request after starting the service for the first time may trigger a lengthy compilation step. This is expected, not a bug, so please wait patiently.
+
+### Request and Response
+
+#### MOSS-TTS (Delay)
+
+```bash
+curl -X POST http://localhost:30000/generate \
+  -H "Content-Type: application/json" \
+  -d '{
+    "text": "Added SGLang backend support for efficient inference.",
+    "audio_data": "https://cdn.jsdelivr.net/gh/OpenMOSS/MOSS-TTSD@main/legacy/v0.7/examples/zh_spk1_moon.wav",
+    "sampling_params": {
+      "max_new_tokens": 512,
+      "temperature": 1.7,
+      "top_p": 0.8,
+      "top_k": 25
+    }
+  }'
+```
+
+- `text` denotes the text content to be synthesized; you can prepend `${token:25}` for token control, for example `${token:25}Hello World`
+- `audio_data` denotes the optional reference audio; if omitted, the model generates audio with a random timbre, and it can be either `<path-to-audio-file>` or `data:audio/wav;base64,{b64_audio}`, where `b64_audio` is the base64 string of a wav file.
+
+#### MOSS-SoundEffect
+
+```bash
+curl -X POST http://localhost:30000/generate \
+  -H "Content-Type: application/json" \
+  -d '{
+    "text": "${token:125}${ambient_sound:a sports car roaring past on the highway.}",
+    "sampling_params": {
+      "max_new_tokens": 512,
+      "temperature": 1.5,
+      "top_p": 0.6,
+      "top_k": 50
+    }
+  }'
+```
+
+- `text` should contain only two tagged fields: `${token:125}` and `${ambient_sound:...}`, where the content after `${ambient_sound:...}` is a natural-language description of the target sound effect.
+- `${token:125}` is recommended for more stable generation.
+- Do not pass `audio_data`, or the model may go OOD.
+
+#### Response
+
+```json
+{"text": "<wav-base64>", "...": "..."}
+```
+
+The HTTP response is a JSON object and may contain multiple fields. The `.text` field stores the WAV base64 string for the generated audio. In most cases, you only need to extract that field and base64-decode it; for example, after saving the response as `response.json`, you can run `jq -r '.text' response.json | base64 -d -i > output.wav`.
+
 ## Evaluation
 
 This section summarizes the **family‑level evaluation highlights** for MOSS‑TTS, MOSS-TTSD and MOSS‑VoiceGenerator. For full details, see each model’s model card.
@@ -477,6 +561,20 @@ MOSS‑VoiceGenerator demonstrates strong subjective preference across **overall
 <p align="center">
   <img src="./assets/moss_voice_generator_winrate.png" width="70%" />
 </p>
+
+### MOSS‑TTS-Realtime
+We evaluated the TTFB (Time To First Byte) and RTF (Real-Time Factor) of MOSS-TTS-Realtime.
+
+Note: SDPA + torch.compile were enabled during testing. The following results are tested on a single L20 GPU. 
+
+| Model | TTFB (ms) | RTF |
+|-------------|-----------|-----|
+| **MOSS-TTS-Realtime** | 180（After warm up）| 0.51 |
+
+We deployed Qwen3.5-9B using vLLM to measure $T_{\text{LLM-first-sentence}}$. The time required to generate 12 tokens (the TTS prefill length) was 197 ms.
+
+$T_{\text{LLM-first-sentence}} + T_{\text{MOSS-TTS-Realtime-TTFB}} = 197ms + 180ms = 377ms$
+
 
 ## MOSS-Audio-Tokenizer
 
