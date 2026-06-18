@@ -8,20 +8,22 @@
   <img src="./assets/mosi-logo.png" height="50" align="middle" />
 </p>
 
-
+<div align="center">
+  <a href="https://trendshift.io/repositories/22854" target="_blank"><img src="https://trendshift.io/api/badge/repositories/22854" alt="OpenMOSS%2FMOSS-TTS | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
+</div>
 
 
 <div align="center">
   <a href="https://clawhub.ai/luogao2333/moss-tts-voice"><img src="https://img.shields.io/badge/🦞_OpenClaw-Skills-8A2BE2" alt="OpenClaw"></a>
   <a href="https://huggingface.co/collections/OpenMOSS-Team/moss-tts"><img src="https://img.shields.io/badge/Huggingface-Models-orange?logo=huggingface&amp"></a>
-  <a href="https://modelscope.cn/collections/OpenMOSS-Team/MOSS-TTS"><img src="https://img.shields.io/badge/ModelScope-Models-lightgrey?logo=modelscope&amp"></a>
+  <a href="https://www.modelscope.cn/collections/openmoss/MOSS-TTS"><img src="https://img.shields.io/badge/ModelScope-Model-7B61FF?logo=modelscope&logoColor=white"></a>
   <a href="https://mosi.cn/#models"><img src="https://img.shields.io/badge/Blog-View-blue?logo=internet-explorer&amp"></a>
   <a href="https://arxiv.org/abs/2603.18090"><img src="https://img.shields.io/badge/Arxiv-2603.18090-red?logo=Arxiv&amp"></a>
 
   <a href="https://studio.mosi.cn"><img src="https://img.shields.io/badge/AIStudio-Try-green?logo=internet-explorer&amp"></a>
   <a href="https://studio.mosi.cn/docs/moss-tts"><img src="https://img.shields.io/badge/API-Docs-00A3FF?logo=fastapi&amp"></a>
   <a href="https://x.com/Open_MOSS"><img src="https://img.shields.io/badge/Twitter-Follow-black?logo=x&amp"></a>
-  <a href="https://discord.gg/Xf3aXddCjc"><img src="https://img.shields.io/badge/Discord-Join-5865F2?logo=discord&amp"></a>
+  <a href="https://discord.gg/Ahu78PH4p"><img src="https://img.shields.io/badge/Discord-Join-5865F2?logo=discord&amp"></a>
   <a href="./assets/wechat.jpg"><img src="https://img.shields.io/badge/WeChat-Join-07C160?logo=wechat&amp;logoColor=white" alt="WeChat"></a>
 </div>
 
@@ -31,7 +33,17 @@
 
 MOSS‑TTS Family is an open‑source **speech and sound generation model family** from [MOSI.AI](https://mosi.cn/#hero) and the [OpenMOSS team](https://www.open-moss.com/). It is designed for **high‑fidelity**, **high‑expressiveness**, and **complex real‑world scenarios**, covering stable long‑form speech, multi‑speaker dialogue, voice/character design, environmental sound effects, and real‑time streaming TTS.
 
+
 ## News
+* 2026.6.18: 🚀 [MOSS-TTS-Local-Transformer-v1.5](https://huggingface.co/OpenMOSS-Team/MOSS-TTS-Local-Transformer-v1.5) receives **Day-0 support** in [SGLang-Omni](https://github.com/sgl-project/sglang-omni) — the first inference backend to support the `MossTTSLocal` architecture, with an OpenAI-compatible `/v1/audio/speech` endpoint, streaming, and voice cloning. See the cookbooks: [`moss_tts_local`](https://github.com/sgl-project/sglang-omni/blob/main/docs/cookbook/moss_tts_local.md), [`moss_tts`](https://github.com/sgl-project/sglang-omni/blob/main/docs/cookbook/moss_tts.md).
+* 2026.6.18: 🚀 Released [MOSS-TTS-Local-Transformer-v1.5](https://huggingface.co/OpenMOSS-Team/MOSS-TTS-Local-Transformer-v1.5), a **4B** `MossTTSLocal` checkpoint that inherits all v1.5 features (language tags, stable cloning, explicit pause control, etc.), scales the backbone from Qwen3-1.7B to Qwen3-4B, and uses **MOSS-Audio-Tokenizer-v2** for native **48 kHz stereo** output.
+* 2026.6.7: 🚀 Released [MOSS-Audio-Tokenizer-v2](https://huggingface.co/OpenMOSS-Team/MOSS-Audio-Tokenizer-v2), natively supporting 48 kHz stereo input and output. Check out the [MOSS-Audio-Tokenizer repository](https://github.com/OpenMOSS/MOSS-Audio-Tokenizer) for more details!
+* 2026.6.2: 🚀 [vLLM-Omni](https://github.com/vllm-project/vllm-omni) now supports the full MOSS-TTS series (`MossTTSDelay`, `MossTTSRealtime`, and `MossTTSNano` architectures), including MOSS-TTS-v1.5, MOSS-TTS, MOSS-TTSD, MOSS-SoundEffect, MOSS-VoiceGenerator, MOSS-TTS-Realtime, and MOSS-TTS-Nano. See the [recipe](https://github.com/vllm-project/vllm-omni/blob/main/recipes/OpenMOSS/MOSS-TTS.md) and [examples](https://github.com/vllm-project/vllm-omni/tree/main/examples/offline_inference/text_to_speech/moss_tts).
+* 2026.5.26: 🚀 Released [MOSS-SoundEffect-v2.0](https://huggingface.co/OpenMOSS-Team/MOSS-SoundEffect-v2.0), a new text-to-audio model using a **DiT backbone with the Flow Matching objective**, generating **48 kHz** bilingual sound effects up to **30 seconds** — see [`moss_soundeffect_v2/`](https://github.com/OpenMOSS/MOSS-TTS/tree/main/moss_soundeffect_v2).
+* 2026.5.26: 🚀 Released [MOSS-TTS-v1.5](https://huggingface.co/OpenMOSS-Team/MOSS-TTS-v1.5), with stronger multilingual synthesis when language tags are provided, more stable voice cloning, better long-reference short-text cloning, punctuation-following prosody, and explicit pause control via `[pause X.Ys]`.
+* 2026.5.6: 🚀 MOSS-TTS and MOSS-Audio-Tokenizer now support `mlx-audio`. Visit the [mlx-audio GitHub repository](https://github.com/Blaizzy/mlx-audio) for details.
+* 2026.4.29: 📝 MOSS-TTS 2.0 is coming soon! We are collecting TTS feedback, suggestions, and feature requests via the [requirements collection form](https://acnc6zeentra.feishu.cn/share/base/form/shrcnyAe1LwqKWjCSuW4wiZ2Hef).
+* 2026.4.13: 🚀 MOSS-TTS-Nano, our ~100M-parameter model, is now available! It supports multilingual voice cloning, 48 kHz stereo input/output, and streaming output on just 4 CPU cores. Check the [GitHub repository](https://github.com/OpenMOSS/MOSS-TTS-Nano) and our [blog](https://openmoss.github.io/MOSS-TTS-Nano-Demo/) for more details.
 * 2026.3.31: 📄 Our technical reports for [MOSS-TTSD](https://arxiv.org/pdf/2603.19739) and [MOSS-VoiceGenerator](https://arxiv.org/pdf/2603.28086) are now available on arXiv!
 * 2026.3.26: 📘 Added a tutorial on fine-tuning the MOSS-TTS-Realtime!
 * 2026.3.20: 📄 Our [technical report](https://arxiv.org/pdf/2603.18090) is now available on arXiv!
@@ -53,29 +65,51 @@ MOSS‑TTS Family is an open‑source **speech and sound generation model family
 
 ## Contents
 
-- [Introduction](#introduction)
-- [Model Architecture](#model-architecture)
-- [Released Models](#released-models)
-- [Supported Languages](#supported-languages)
-- [Quickstart](#quickstart)
-  - [OpenClaw API Skills](#openclaw-api-skills)
-  - [Environment Setup](#environment-setup)
-  - [(Optional) Install FlashAttention 2](#optional-install-flashattention-2)
-  - [MOSS-TTS Basic Usage](#moss-tts-basic-usage)
-- [Fine-Tuning](#fine-tuning)
-- [llama.cpp Backend (Torch-Free Inference)](#llamacpp-backend-torch-free-inference)
-- [SGLang Backend (Accelerated Inference)](#sglang-backend-accelerated-inference)
-- [Evaluation](#evaluation)
-  - [MOSS-TTS](#moss-tts-seed-tts-eval)
-  - [MOSS-TTSD](#moss-ttsd-subjective--ttsd-eval)
-  - [MOSS-VoiceGenerator](#moss-voicegenerator-subjective)
-- [MOSS-Audio-Tokenizer](#moss-audio-tokenizer)
-  - [Introduction](#mat-intro)
-  - [Model Weights](#model-weights)
-  - [Objective Reconstruction Evaluation](#objective-reconstruction-evaluation)
-- [More Information](#more-information)
-  - [Community Projects](#community-projects)
-- [Citation](#citation)
+- [MOSS-TTS Family](#moss-tts-family)
+  - [News](#news)
+  - [Demo](#demo)
+  - [Contents](#contents)
+  - [Introduction](#introduction)
+  - [Model Architecture](#model-architecture)
+  - [Released Models](#released-models)
+  - [Supported Languages](#supported-languages)
+  - [MOSS-TTS-v1.5](#moss-tts-v15)
+  - [MOSS-TTS-Local-Transformer-v1.5](#moss-tts-local-transformer-v15)
+  - [Quickstart](#quickstart)
+    - [OpenClaw API Skills](#openclaw-api-skills)
+    - [Environment Setup](#environment-setup)
+      - [Using Conda](#using-conda)
+      - [Using `uv`](#using-uv)
+      - [(Optional) Install FlashAttention 2](#optional-install-flashattention-2)
+    - [MOSS‑TTS Basic Usage](#mosstts-basic-usage)
+  - [Fine-Tuning](#fine-tuning)
+  - [llama.cpp Backend (Torch-Free Inference)](#llamacpp-backend-torch-free-inference)
+    - [Quick Start](#quick-start)
+    - [Installation Profiles](#installation-profiles)
+    - [Model Weights](#model-weights)
+    - [Configuration](#configuration)
+  - [Accelerated Inference Backends](#accelerated-inference-backends)
+    - [SGLang-Omni](#sglang-omni)
+    - [vLLM-Omni](#vllm-omni)
+  - [Evaluation](#evaluation)
+    - [MOSS‑TTS](#mosstts)
+    - [MOSS‑TTSD](#mossttsd)
+      - [Objective Evaluation](#objective-evaluation)
+      - [Subjective Evaluation](#subjective-evaluation)
+    - [MOSS‑VoiceGenerator](#mossvoicegenerator)
+    - [MOSS‑TTS-Realtime](#mosstts-realtime)
+  - [MOSS-TTS-Nano](#moss-tts-nano)
+    - [Introduction](#introduction-1)
+    - [Model Weights](#model-weights-1)
+  - [MOSS-Audio-Tokenizer](#moss-audio-tokenizer)
+    - [Introduction](#introduction-2)
+    - [Model Weights](#model-weights-2)
+    - [Objective Reconstruction Evaluation](#objective-reconstruction-evaluation)
+  - [📚 More Information](#-more-information)
+    - [🌟 Community Projects](#-community-projects)
+  - [LICENSE](#license)
+  - [Citation](#citation)
+  - [Star History](#star-history)
 
 
 ## Introduction
@@ -111,26 +145,60 @@ We train **MossTTSDelay** and **MossTTSLocal** as complementary baselines under 
 
 | Model | Architecture | Size | Model Card | Hugging Face | ModelScope |
 |---|---|---:|---|---|---|
-| **MOSS-TTS** | `MossTTSDelay` | 8B | [![Model Card](https://img.shields.io/badge/Model%20Card-View-blue?logo=markdown)](docs/moss_tts_model_card.md) | [![Hugging Face](https://img.shields.io/badge/Huggingface-Model-orange?logo=huggingface)](https://huggingface.co/OpenMOSS-Team/MOSS-TTS) | [![ModelScope](https://img.shields.io/badge/ModelScope-Model-lightgrey?logo=modelscope)](https://modelscope.cn/models/openmoss/MOSS-TTS) |
-|  | `MossTTSLocal` | 1.7B | [![Model Card](https://img.shields.io/badge/Model%20Card-View-blue?logo=markdown)](docs/moss_tts_model_card.md) | [![Hugging Face](https://img.shields.io/badge/Huggingface-Model-orange?logo=huggingface)](https://huggingface.co/OpenMOSS-Team/MOSS-TTS-Local-Transformer) | [![ModelScope](https://img.shields.io/badge/ModelScope-Model-lightgrey?logo=modelscope)](https://modelscope.cn/models/openmoss/MOSS-TTS-Local-Transformer) |
-| **MOSS‑TTSD‑V1.0** | `MossTTSDelay` | 8B | [![Model Card](https://img.shields.io/badge/Model%20Card-View-blue?logo=markdown)](docs/moss_ttsd_model_card.md) | [![Hugging Face](https://img.shields.io/badge/Huggingface-Model-orange?logo=huggingface)](https://huggingface.co/OpenMOSS-Team/MOSS-TTSD-v1.0) | [![ModelScope](https://img.shields.io/badge/ModelScope-Model-lightgrey?logo=modelscope)](https://modelscope.cn/models/openmoss/MOSS-TTSD-v1.0) |
-| **MOSS‑VoiceGenerator** | `MossTTSDelay` | 1.7B | [![Model Card](https://img.shields.io/badge/Model%20Card-View-blue?logo=markdown)](docs/moss_voice_generator_model_card.md) | [![Hugging Face](https://img.shields.io/badge/Huggingface-Model-orange?logo=huggingface)](https://huggingface.co/OpenMOSS-Team/MOSS-VoiceGenerator) | [![ModelScope](https://img.shields.io/badge/ModelScope-Model-lightgrey?logo=modelscope)](https://modelscope.cn/models/openmoss/MOSS-VoiceGenerator) |
-| **MOSS‑SoundEffect** | `MossTTSDelay` | 8B | [![Model Card](https://img.shields.io/badge/Model%20Card-View-blue?logo=markdown)](docs/moss_sound_effect_model_card.md) | [![Hugging Face](https://img.shields.io/badge/Huggingface-Model-orange?logo=huggingface)](https://huggingface.co/OpenMOSS-Team/MOSS-SoundEffect) | [![ModelScope](https://img.shields.io/badge/ModelScope-Model-lightgrey?logo=modelscope)](https://modelscope.cn/models/openmoss/MOSS-SoundEffect) |
-| **MOSS‑TTS‑Realtime** | `MossTTSRealtime` | 1.7B | [![Model Card](https://img.shields.io/badge/Model%20Card-View-blue?logo=markdown)](docs/moss_tts_realtime_model_card.md) | [![Hugging Face](https://img.shields.io/badge/Huggingface-Model-orange?logo=huggingface)](https://huggingface.co/OpenMOSS-Team/MOSS-TTS-Realtime) | [![ModelScope](https://img.shields.io/badge/ModelScope-Model-lightgrey?logo=modelscope)](https://modelscope.cn/models/openmoss/MOSS-TTS-Realtime) |
+| **MOSS-TTS-v1.5** | `MossTTSDelay` | 8B | [![Model Card](https://img.shields.io/badge/Model%20Card-View-blue?logo=markdown)](docs/moss_tts_model_card.md) | [![Hugging Face](https://img.shields.io/badge/Huggingface-Model-orange?logo=huggingface)](https://huggingface.co/OpenMOSS-Team/MOSS-TTS-v1.5) | [![ModelScope](https://img.shields.io/badge/ModelScope-Model-7B61FF?logo=modelscope&logoColor=white)](https://modelscope.cn/models/openmoss/MOSS-TTS-v1.5) |
+| **MOSS-TTS 1.0** | `MossTTSDelay` | 8B | [![Model Card](https://img.shields.io/badge/Model%20Card-View-blue?logo=markdown)](docs/moss_tts_model_card.md) | [![Hugging Face](https://img.shields.io/badge/Huggingface-Model-orange?logo=huggingface)](https://huggingface.co/OpenMOSS-Team/MOSS-TTS) | [![ModelScope](https://img.shields.io/badge/ModelScope-Model-7B61FF?logo=modelscope&logoColor=white)](https://modelscope.cn/models/openmoss/MOSS-TTS) |
+| **MOSS-TTS-Local-Transformer-v1.5** | `MossTTSLocal` | 4B | [![Model Card](https://img.shields.io/badge/Model%20Card-View-blue?logo=markdown)](moss_tts_local_v1.5/README.md) | [![Hugging Face](https://img.shields.io/badge/Huggingface-Model-orange?logo=huggingface)](https://huggingface.co/OpenMOSS-Team/MOSS-TTS-Local-Transformer-v1.5) | [![ModelScope](https://img.shields.io/badge/ModelScope-Model-7B61FF?logo=modelscope&logoColor=white)](https://modelscope.cn/models/openmoss/MOSS-TTS-Local-Transformer-v1.5) |
+| **MOSS-TTS-Local-Transformer** | `MossTTSLocal` | 1.7B | [![Model Card](https://img.shields.io/badge/Model%20Card-View-blue?logo=markdown)](docs/moss_tts_model_card.md) | [![Hugging Face](https://img.shields.io/badge/Huggingface-Model-orange?logo=huggingface)](https://huggingface.co/OpenMOSS-Team/MOSS-TTS-Local-Transformer) | [![ModelScope](https://img.shields.io/badge/ModelScope-Model-7B61FF?logo=modelscope&logoColor=white)](https://modelscope.cn/models/openmoss/MOSS-TTS-Local-Transformer) |
+| **MOSS‑TTSD‑V1.0** | `MossTTSDelay` | 8B | [![Model Card](https://img.shields.io/badge/Model%20Card-View-blue?logo=markdown)](docs/moss_ttsd_model_card.md) | [![Hugging Face](https://img.shields.io/badge/Huggingface-Model-orange?logo=huggingface)](https://huggingface.co/OpenMOSS-Team/MOSS-TTSD-v1.0) | [![ModelScope](https://img.shields.io/badge/ModelScope-Model-7B61FF?logo=modelscope&logoColor=white)](https://modelscope.cn/models/openmoss/MOSS-TTSD-v1.0) |
+| **MOSS‑VoiceGenerator** | `MossTTSDelay` | 1.7B | [![Model Card](https://img.shields.io/badge/Model%20Card-View-blue?logo=markdown)](docs/moss_voice_generator_model_card.md) | [![Hugging Face](https://img.shields.io/badge/Huggingface-Model-orange?logo=huggingface)](https://huggingface.co/OpenMOSS-Team/MOSS-VoiceGenerator) | [![ModelScope](https://img.shields.io/badge/ModelScope-Model-7B61FF?logo=modelscope&logoColor=white)](https://modelscope.cn/models/openmoss/MOSS-VoiceGenerator) |
+| **MOSS‑SoundEffect** | `MossTTSDelay` | 8B | [![Model Card](https://img.shields.io/badge/Model%20Card-View-blue?logo=markdown)](docs/moss_sound_effect_model_card.md) | [![Hugging Face](https://img.shields.io/badge/Huggingface-Model-orange?logo=huggingface)](https://huggingface.co/OpenMOSS-Team/MOSS-SoundEffect) | [![ModelScope](https://img.shields.io/badge/ModelScope-Model-7B61FF?logo=modelscope&logoColor=white)](https://modelscope.cn/models/openmoss/MOSS-SoundEffect) |
+| **MOSS‑SoundEffect‑v2.0** | `MossSoundEffectPipeline` | 1.3B DiT | [![Model Card](https://img.shields.io/badge/Model%20Card-View-blue?logo=markdown)](moss_soundeffect_v2/README.md) | [![Hugging Face](https://img.shields.io/badge/Huggingface-Model-orange?logo=huggingface)](https://huggingface.co/OpenMOSS-Team/MOSS-SoundEffect-v2.0) | [![ModelScope](https://img.shields.io/badge/ModelScope-Model-7B61FF?logo=modelscope&logoColor=white)](https://modelscope.cn/models/openmoss/MOSS-SoundEffect-v2.0) |
+| **MOSS‑TTS‑Realtime** | `MossTTSRealtime` | 1.7B | [![Model Card](https://img.shields.io/badge/Model%20Card-View-blue?logo=markdown)](docs/moss_tts_realtime_model_card.md) | [![Hugging Face](https://img.shields.io/badge/Huggingface-Model-orange?logo=huggingface)](https://huggingface.co/OpenMOSS-Team/MOSS-TTS-Realtime) | [![ModelScope](https://img.shields.io/badge/ModelScope-Model-7B61FF?logo=modelscope&logoColor=white)](https://modelscope.cn/models/openmoss/MOSS-TTS-Realtime) |
 
 ## Supported Languages
 
-MOSS-TTS, MOSS-TTSD and MOSS-TTS-Realtime currently supports **20 languages**:
+MOSS-TTS-v1.5 and MOSS-TTS-Local-Transformer-v1.5 currently support **31 languages**. They keep the 20 languages supported by [MOSS-TTS 1.0](https://huggingface.co/OpenMOSS-Team/MOSS-TTS) and extend multilingual continued training to Cantonese, Dutch, Finnish, Hindi, Macedonian, Malay, Romanian, Swahili, Tagalog, Thai, and Vietnamese.
+
+MOSS-TTSD and MOSS-TTS-Realtime follow their own model cards for supported language coverage.
 
 | Language | Code | Flag | Language | Code | Flag | Language | Code | Flag |
 |---|---|---|---|---|---|---|---|---|
-| Chinese | zh | 🇨🇳 | English | en | 🇺🇸 | German | de | 🇩🇪 |
-| Spanish | es | 🇪🇸 | French | fr | 🇫🇷 | Japanese | ja | 🇯🇵 |
-| Italian | it | 🇮🇹 | Hungarian | hu | 🇭🇺 | Korean | ko | 🇰🇷 |
-| Russian | ru | 🇷🇺 | Persian (Farsi) | fa | 🇮🇷 | Arabic | ar | 🇸🇦 |
-| Polish | pl | 🇵🇱 | Portuguese | pt | 🇵🇹 | Czech | cs | 🇨🇿 |
-| Danish | da | 🇩🇰 | Swedish | sv | 🇸🇪 | | | |
-| Greek | el | 🇬🇷 | Turkish | tr | 🇹🇷 |  |  |  |
+| Chinese | zh | 🇨🇳 | Cantonese | yue | 🇭🇰 | English | en | 🇺🇸 |
+| Arabic | ar | 🇸🇦 | Czech | cs | 🇨🇿 | Danish | da | 🇩🇰 |
+| Dutch | nl | 🇳🇱 | Finnish | fi | 🇫🇮 | French | fr | 🇫🇷 |
+| German | de | 🇩🇪 | Greek | el | 🇬🇷 | Hebrew | he | 🇮🇱 |
+| Hindi | hi | 🇮🇳 | Hungarian | hu | 🇭🇺 | Italian | it | 🇮🇹 |
+| Japanese | ja | 🇯🇵 | Korean | ko | 🇰🇷 | Macedonian | mk | 🇲🇰 |
+| Malay | ms | 🇲🇾 | Persian (Farsi) | fa | 🇮🇷 | Polish | pl | 🇵🇱 |
+| Portuguese | pt | 🇵🇹 | Romanian | ro | 🇷🇴 | Russian | ru | 🇷🇺 |
+| Spanish | es | 🇪🇸 | Swahili | sw | 🇹🇿 | Swedish | sv | 🇸🇪 |
+| Tagalog | tl | 🇵🇭 | Thai | th | 🇹🇭 | Turkish | tr | 🇹🇷 |
+| Vietnamese | vi | 🇻🇳 | | | | | | |
+
+## MOSS-TTS-v1.5
+
+**MOSS-TTS-v1.5** is continued from [MOSS-TTS 1.0](https://huggingface.co/OpenMOSS-Team/MOSS-TTS). It preserves the main 1.0 capabilities, including zero-shot voice cloning, long-form speech generation, token-level duration control, Pinyin/IPA pronunciation control, multilingual synthesis, and code-switching.
+
+Compared with MOSS-TTS 1.0, v1.5 focuses on these improvements:
+
+- **Stronger multilingual synthesis with language tags**: when the language is known, set it in `processor.build_user_message(text=text, language="French")` or the equivalent API field.
+- **More stable voice cloning**: v1.5 improves speaker similarity and reduces cloning variance across repeated generations.
+- **Better long-reference, short-text cloning**: v1.5 handles reference audio that is much longer than the target text more reliably.
+- **More stable punctuation-following prosody**: v1.5 follows punctuation-driven pauses more closely, especially in long sentences.
+- **Explicit pause control**: use inline pause markers such as `[pause 3.2s]`, for example `我今天学习了一首中国的古诗，它的名字是[pause 3.2s]静夜思！`.
+
+## MOSS-TTS-Local-Transformer-v1.5
+
+**MOSS-TTS-Local-Transformer-v1.5** is the 48 kHz stereo local-transformer release. It uses [MOSS-Audio-Tokenizer-v2](https://huggingface.co/OpenMOSS-Team/MOSS-Audio-Tokenizer-v2) as the audio tokenizer and adds realtime streaming decode examples in [`moss_tts_local_v1.5/`](moss_tts_local_v1.5/README.md).
+
+Compared with [MOSS-TTS-Local-Transformer-v1.0](https://huggingface.co/OpenMOSS-Team/MOSS-TTS-Local-Transformer), v1.5 focuses on these improvements:
+
+- **Higher-fidelity stereo audio modeling**: v1.5 uses [MOSS-Audio-Tokenizer-v2](https://huggingface.co/OpenMOSS-Team/MOSS-Audio-Tokenizer-v2) as the audio tokenizer, supporting native 48 kHz stereo input and output for richer spatial detail and more natural perceived audio quality.
+- **Stronger multilingual synthesis with language tags**: when the language is known, set it in `processor.build_user_message(text=text, language="French")` or the equivalent API field.
+- **More stable voice cloning**: v1.5 improves speaker similarity and reduces cloning variance across repeated generations.
+- **Better long-reference, short-text cloning**: v1.5 handles reference audio that is much longer than the target text more reliably.
+- **More stable punctuation-following prosody**: v1.5 follows punctuation-driven pauses more closely, especially in long sentences.
+- **Explicit pause control**: use inline pause markers such as `[pause 3.2s]`, for example `我今天学习了一首中国的古诗，它的名字是[pause 3.2s]静夜思！`.
 
 
 ## Quickstart
@@ -155,7 +223,16 @@ conda create -n moss-tts python=3.12 -y
 conda activate moss-tts
 ```
 
-Install all required dependencies:
+Install the FFmpeg system dependency (required by `torchcodec` for audio I/O):
+
+```bash
+# Debian/Ubuntu
+sudo apt-get install -y ffmpeg
+# macOS
+brew install ffmpeg
+```
+
+Install all required Python dependencies:
 
 ```bash
 git clone https://github.com/OpenMOSS/MOSS-TTS.git
@@ -213,16 +290,25 @@ Notes:
 <a id="moss-tts-basic-usage"></a>
 ### MOSS‑TTS Basic Usage
 
-If you prefer Gradio demos, we provide 4 scripts for the main models:
+If you prefer browser demos, we provide scripts for the main models:
 
-| Model | Script | Run |
-|---|---|---|
+| Model | Script |
+|---|---|
 | MOSS-TTS | [clis/moss_tts_app.py](clis/moss_tts_app.py) |
-| MOSS-TTSD | [clis/moss_ttsd_app.py](clis/moss_ttsd_app.py) | 
+| MOSS-TTS-Local-Transformer-v1.5 | [clis/moss_tts_local_v1.5_app.py](clis/moss_tts_local_v1.5_app.py) |
+| MOSS-TTSD | [clis/moss_ttsd_app.py](clis/moss_ttsd_app.py) |
 | MOSS-VoiceGenerator | [clis/moss_voice_generator_app.py](clis/moss_voice_generator_app.py) |
-| MOSS-SoundEffect | [clis/moss_sound_effect_app.py](clis/moss_sound_effect_app.py) | 
+| MOSS-SoundEffect | [clis/moss_sound_effect_app.py](clis/moss_sound_effect_app.py) |
 
 For the MOSS-TTS-Realtime Gradio demo, please refer to [MOSS-TTS-Realtime Model Card](docs/moss_tts_realtime_model_card.md)
+
+> Tip: MOSS-TTS-v1.5 uses the same generation API as the 1.0 `MossTTSDelay-8B` checkpoint. For multilingual inputs, set `language` whenever the language is known.
+
+MOSS-TTS provides a convenient `generate` interface for rapid usage. The examples below cover:
+1. Direct generation (Chinese / English / multilingual text with language tags / Pinyin / IPA)
+2. Voice cloning
+3. Duration control
+4. Explicit pause control with `[pause X.Ys]`
 
 ```python
 from pathlib import Path
@@ -238,7 +324,7 @@ torch.backends.cuda.enable_mem_efficient_sdp(True)
 torch.backends.cuda.enable_math_sdp(True)
 
 
-pretrained_model_name_or_path = "OpenMOSS-Team/MOSS-TTS"
+pretrained_model_name_or_path = "OpenMOSS-Team/MOSS-TTS-v1.5"
 device = "cuda" if torch.cuda.is_available() else "cpu"
 dtype = torch.bfloat16 if device == "cuda" else torch.float32
 
@@ -276,20 +362,27 @@ text_3 = "nin2 hao3，qing3 wen4 nin2 lai2 zi4 na3 zuo4 cheng2 shi4？"
 text_4 = "nin2 hao3，qing4 wen3 nin2 lai2 zi4 na4 zuo3 cheng4 shi3？"
 text_5 = "您好，请问您来自哪 zuo4 cheng2 shi4？"
 text_6 = "/həloʊ, meɪ aɪ æsk wɪtʃ sɪti juː ɑːr frʌm?/"
+text_7 = "Bonjour, je voudrais essayer une voix française naturelle et stable."
+text_8 = "我今天学习了一首中国的古诗，它的名字是[pause 3.2s]静夜思！"
 
 # Use audio from ./assets/audio to avoid downloading from the cloud.
 ref_audio_1 = "https://speech-demo.oss-cn-shanghai.aliyuncs.com/moss_tts_demo/tts_readme_demo/reference_zh.wav"
 ref_audio_2 = "https://speech-demo.oss-cn-shanghai.aliyuncs.com/moss_tts_demo/tts_readme_demo/reference_en.m4a"
 
 conversations = [
-    # Direct TTS (no reference)
+    # Direct TTS (no reference). Language tags are recommended in v1.5.
     [processor.build_user_message(text=text_1)],
     [processor.build_user_message(text=text_2)],
+    # Direct TTS (no reference). For languages other than Chinese and English,
+    # set the language tag whenever it is known.
+    [processor.build_user_message(text=text_7, language="French")],
     # Pinyin or IPA input
     [processor.build_user_message(text=text_3)],
     [processor.build_user_message(text=text_4)],
     [processor.build_user_message(text=text_5)],
     [processor.build_user_message(text=text_6)],
+    # Explicit pause control. Use [pause X.Ys], such as [pause 3.2s].
+    [processor.build_user_message(text=text_8)],
     # Voice cloning (with reference)
     [processor.build_user_message(text=text_1, reference=[ref_audio_1])],
     [processor.build_user_message(text=text_2, reference=[ref_audio_2])],
@@ -302,7 +395,7 @@ model = AutoModel.from_pretrained(
     pretrained_model_name_or_path,
     trust_remote_code=True,
     attn_implementation=attn_implementation,
-    torch_dtype=dtype,
+    dtype=dtype,
 ).to(device)
 model.eval()
 
@@ -328,11 +421,17 @@ with torch.no_grad():
             audio = message.audio_codes_list[0]
             out_path = save_dir / f"sample{sample_idx}.wav"
             sample_idx += 1
-            torchaudio.save(out_path, audio.unsqueeze(0), processor.model_config.sampling_rate)
+            if audio.ndim == 1:
+                audio = audio.unsqueeze(0)
+            torchaudio.save(
+                str(out_path),
+                audio.detach().cpu().to(torch.float32),
+                processor.model_config.sampling_rate,
+            )
 
 ```
 
-For each model’s full usage, please refer to its corresponding model card.
+For each model's full usage, please refer to its corresponding model card. For the 48 kHz stereo local-transformer v1.5 checkpoint and realtime streaming decode, see [`moss_tts_local_v1.5/`](moss_tts_local_v1.5/README.md).
 
 <a id="fine-tuning"></a>
 ## Fine-Tuning
@@ -341,7 +440,7 @@ Finetuning tutorials are organized by architecture.
 
 Currently available:
 
-- `MossTTSDelay` / `OpenMOSS-Team/MOSS-TTS`: [moss_tts_delay/finetuning/README.md](moss_tts_delay/finetuning/README.md)
+- `MossTTSDelay` / `OpenMOSS-Team/MOSS-TTS-v1.5` (also compatible with `OpenMOSS-Team/MOSS-TTS`): [moss_tts_delay/finetuning/README.md](moss_tts_delay/finetuning/README.md)
 - `MossTTSLocal` / `OpenMOSS-Team/MOSS-TTS-Local-Transformer`: [moss_tts_local/finetuning/README.md](moss_tts_local/finetuning/README.md)
 - `Moss-TTS-Realtime` / `OpenMOSS-Team/MOSS-TTS-Realtime`: [moss_tts_realtime/finetuning/README.md](moss_tts_realtime/finetuning/README.md)
 
@@ -418,87 +517,26 @@ Key config options:
 
 For full documentation, see [moss_tts_delay/llama_cpp/README.md](moss_tts_delay/llama_cpp/README.md).
 
-## SGLang Backend (Accelerated Inference)
+## Accelerated Inference Backends
 
-MOSS-TTS (Delay) supports running the fused MOSS-TTS and MOSS-Audio-Tokenizer model with the deeply extended [SGLang](https://github.com/OpenMOSS/sglang) from OpenMOSS, enabling efficient inference for audio generation.
+MOSS-TTS models can be served with high-throughput inference backends for production deployment. Both [SGLang-Omni](https://github.com/sgl-project/sglang-omni) and [vLLM-Omni](https://github.com/vllm-project/vllm-omni) provide OpenAI-compatible serving with streaming and voice cloning support.
 
-### Quick Start
+### SGLang-Omni
 
-```bash
-# 1. Clone the SGLang repository
-git clone https://github.com/OpenMOSS/sglang.git
+[SGLang-Omni](https://github.com/sgl-project/sglang-omni) supports the `MossTTSDelay` and `MossTTSLocal` architectures. It is currently the only inference backend that supports the `MossTTSLocal` architecture, providing Day-0 support for [MOSS-TTS-Local-Transformer-v1.5](https://huggingface.co/OpenMOSS-Team/MOSS-TTS-Local-Transformer-v1.5).
 
-# 2. Install SGLang
-pip install -e ./sglang/python[all]
+For setup and usage, see the cookbooks:
+- **MOSS-TTS (Delay)**: [`docs/cookbook/moss_tts.md`](https://github.com/sgl-project/sglang-omni/blob/main/docs/cookbook/moss_tts.md)
+- **MOSS-TTS-Local-Transformer**: [`docs/cookbook/moss_tts_local.md`](https://github.com/sgl-project/sglang-omni/blob/main/docs/cookbook/moss_tts_local.md)
 
-# 3. (Optional) Fix the SGLang CuDNN compatibility error
-#    RuntimeError: CRITICAL WARNING: PyTorch 2.9.1 & CuDNN Compatibility Issue Detected
-pip install nvidia-cudnn-cu12==9.16.0.29
+### vLLM-Omni
 
-# 4. Download the model and audio tokenizer weights
-huggingface-cli download OpenMOSS-Team/MOSS-TTS --local-dir weights/MOSS-TTS
-huggingface-cli download OpenMOSS-Team/MOSS-Audio-Tokenizer --local-dir weights/MOSS-Audio-Tokenizer
+[vLLM-Omni](https://github.com/vllm-project/vllm-omni) supports the `MossTTSDelay`, `MossTTSRealtime`, and `MossTTSNano` architectures, covering MOSS-TTS, MOSS-TTS-v1.5, MOSS-TTSD, MOSS-SoundEffect, MOSS-VoiceGenerator, MOSS-TTS-Realtime, and MOSS-TTS-Nano.
 
-# 5. Fuse the model and audio tokenizer weights
-python scripts/fuse_moss_tts_delay_with_codec.py --model-path weights/MOSS-TTS --codec-model-path weights/MOSS-Audio-Tokenizer --save-path weights/MOSS-TTS-Delay-With-Codec
-
-# 6. Start the service
-sglang serve --model-path weights/MOSS-TTS-Delay-With-Codec --delay-pattern --trust-remote-code
-```
-
-> If the fused output directory already exists, you can append `--overwrite` to replace it directly, or confirm the overwrite interactively when prompted.
-
-> **Note:** The first request after starting the service for the first time may trigger a lengthy compilation step. This is expected, not a bug, so please wait patiently.
-
-### Request and Response
-
-#### MOSS-TTS (Delay)
-
-```bash
-curl -X POST http://localhost:30000/generate \
-  -H "Content-Type: application/json" \
-  -d '{
-    "text": "Added SGLang backend support for efficient inference.",
-    "audio_data": "https://cdn.jsdelivr.net/gh/OpenMOSS/MOSS-TTSD@main/legacy/v0.7/examples/zh_spk1_moon.wav",
-    "sampling_params": {
-      "max_new_tokens": 512,
-      "temperature": 1.7,
-      "top_p": 0.8,
-      "top_k": 25
-    }
-  }'
-```
-
-- `text` denotes the text content to be synthesized; you can prepend `${token:25}` for token control, for example `${token:25}Hello World`
-- `audio_data` denotes the optional reference audio; if omitted, the model generates audio with a random timbre, and it can be either `<path-to-audio-file>` or `data:audio/wav;base64,{b64_audio}`, where `b64_audio` is the base64 string of a wav file.
-
-#### MOSS-SoundEffect
-
-```bash
-curl -X POST http://localhost:30000/generate \
-  -H "Content-Type: application/json" \
-  -d '{
-    "text": "${token:125}${ambient_sound:a sports car roaring past on the highway.}",
-    "sampling_params": {
-      "max_new_tokens": 512,
-      "temperature": 1.5,
-      "top_p": 0.6,
-      "top_k": 50
-    }
-  }'
-```
-
-- `text` should contain only two tagged fields: `${token:125}` and `${ambient_sound:...}`, where the content after `${ambient_sound:...}` is a natural-language description of the target sound effect.
-- `${token:125}` is recommended for more stable generation.
-- Do not pass `audio_data`, or the model may go OOD.
-
-#### Response
-
-```json
-{"text": "<wav-base64>", "...": "..."}
-```
-
-The HTTP response is a JSON object and may contain multiple fields. The `.text` field stores the WAV base64 string for the generated audio. In most cases, you only need to extract that field and base64-decode it; for example, after saving the response as `response.json`, you can run `jq -r '.text' response.json | base64 -d -i > output.wav`.
+For setup and usage, see:
+- **Recipe & deployment configs**: [`recipes/OpenMOSS/MOSS-TTS.md`](https://github.com/vllm-project/vllm-omni/blob/main/recipes/OpenMOSS/MOSS-TTS.md)
+- **Offline inference examples**: [`examples/offline_inference/text_to_speech/moss_tts/`](https://github.com/vllm-project/vllm-omni/tree/main/examples/offline_inference/text_to_speech/moss_tts)
+- **MOSS-TTS-Nano examples**: [`examples/offline_inference/text_to_speech/moss_tts_nano/`](https://github.com/vllm-project/vllm-omni/tree/main/examples/offline_inference/text_to_speech/moss_tts_nano)
 
 ## Evaluation
 
@@ -589,6 +627,36 @@ We deployed Qwen3.5-9B using vLLM to measure $T_{\text{LLM-first-sentence}}$. Th
 
 $T_{\text{LLM-first-sentence}} + T_{\text{MOSS-TTS-Realtime-TTFB}} = 197ms + 180ms = 377ms$
 
+<a id="moss-tts-nano"></a>
+## MOSS-TTS-Nano
+
+<a id="moss-tts-nano-introduction"></a>
+### Introduction
+
+**MOSS-TTS-Nano** is our lightweight TTS model designed for CPU-first realtime deployment. It focuses on the part of speech generation that matters most in practical products: a small footprint, low-latency streaming generation, and voice-cloning quality that is strong enough for local demos, web services, and lightweight production integration. Built on a pure autoregressive **Audio Tokenizer + LLM** pipeline, it keeps the deployment stack simple while making realtime speech generation accessible even without a GPU.
+
+Its main features include:
+
+- **0.1B parameters**: a compact model size that keeps memory usage and deployment cost low, making local deployment and lightweight serving much easier.
+- **Realtime generation on just 4 CPU cores**: streaming speech generation can run efficiently on CPU-only environments, which is practical for local applications and cost-sensitive deployment scenarios.
+- **Multilingual voice cloning**: supports multilingual voice cloning workflows, making it suitable for cross-language synthesis with a single reference speaker.
+- **48 kHz stereo input/output**: natively supports high-quality stereo audio, improving both reference-audio fidelity and final listening quality.
+
+To learn more about setup, advanced usage, and evaluation metrics, please visit the [MOSS-TTS-Nano repository](https://github.com/OpenMOSS/MOSS-TTS-Nano).
+
+<div align="center">
+  <img src="assets/arch_moss_tts_nano.png" alt="MOSS TTS Nano architecture" width="80%" />
+</div>
+
+<p align="center">Architecture of MOSS-TTS-Nano</p>
+
+<a id="moss-tts-nano-model-weights"></a>
+### Model Weights
+
+| Model | Hugging Face | ModelScope |
+|:-----:|:------------:|:----------:|
+| **MOSS-TTS-Nano** | [![Hugging Face](https://img.shields.io/badge/Huggingface-Model-orange?logo=huggingface)](https://huggingface.co/OpenMOSS-Team/MOSS-TTS-Nano) | [![ModelScope](https://img.shields.io/badge/ModelScope-Model-7B61FF?logo=modelscope&logoColor=white)](https://modelscope.cn/models/openmoss/MOSS-TTS-Nano) |
+
 
 ## MOSS-Audio-Tokenizer
 
@@ -610,9 +678,12 @@ To learn more about setup, advanced usage, and evaluation metrics, please visit 
 
 ### Model Weights
 
-| Model | Hugging Face | ModelScope |
-|:-----:|:------------:|:----------:|
-| **MOSS-Audio-Tokenizer** | [![Hugging Face](https://img.shields.io/badge/Huggingface-Model-orange?logo=huggingface)](https://huggingface.co/OpenMOSS-Team/MOSS-Audio-Tokenizer) | [![ModelScope](https://img.shields.io/badge/ModelScope-Model-lightgrey?logo=modelscope)](https://modelscope.cn/models/openmoss/MOSS-Audio-Tokenizer) |
+| Model | Sampling Rate | Channels | Hugging Face | ModelScope |
+|:-----:|:-------------:|:--------:|:------------:|:----------:|
+| **MOSS-Audio-Tokenizer** | 24kHz | 1 channel (mono) | [![HF](https://img.shields.io/badge/HuggingFace-Model-orange?logo=huggingface)](https://huggingface.co/OpenMOSS-Team/MOSS-Audio-Tokenizer) | [![MS](https://img.shields.io/badge/ModelScope-Model-7B61FF?logo=modelscope&logoColor=white)](https://modelscope.cn/models/openmoss/MOSS-Audio-Tokenizer) |
+| **MOSS-Audio-Tokenizer-v2** | 48kHz | 2 channels (stereo) | [![Hugging Face](https://img.shields.io/badge/Huggingface-Model-orange?logo=huggingface)](https://huggingface.co/OpenMOSS-Team/MOSS-Audio-Tokenizer-v2) | [![ModelScope](https://img.shields.io/badge/ModelScope-Model-7B61FF?logo=modelscope&logoColor=white)](https://modelscope.cn/models/openmoss/MOSS-Audio-Tokenizer-v2) |
+| **MOSS-Audio-Tokenizer-Nano** | 48kHz | 2 channels (stereo) | [![Hugging Face](https://img.shields.io/badge/Huggingface-Model-orange?logo=huggingface)](https://huggingface.co/OpenMOSS-Team/MOSS-Audio-Tokenizer-Nano) | [![ModelScope](https://img.shields.io/badge/ModelScope-Model-7B61FF?logo=modelscope&logoColor=white)](https://modelscope.cn/models/openmoss/MOSS-Audio-Tokenizer-Nano) |
+
 
 ### Objective Reconstruction Evaluation
 
@@ -629,7 +700,7 @@ We compare **MOSS Audio Tokenizer** with open-source audio tokenizers on the Lib
 
 <a id="community-projects"></a>
 
-###  🌟 Community Projects
+### 🌟 Community Projects
 The MOSS-TTS community has been growing rapidly, and we’re delighted to showcase some outstanding projects and features built by community members:
 - **[ComfyUI-MOSS-TTS](https://github.com/richservo/comfyui-moss-tts)** A MOSS-TTS extension for ComfyUI.
 - **[MOSS-TTS-OpenAI](https://github.com/dasilva333/moss-tts-openai)** An OpenAI-compatible TTS API for MOSS-TTS.
